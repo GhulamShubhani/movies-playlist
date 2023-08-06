@@ -163,7 +163,11 @@ const SignUp = () => {
   
           const { data } = await axios.post(
             "https://smoggy-necklace-yak.cyclic.app/user/register",
-            obj
+            obj,{
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
           );
           console.log(data,"dara9999999999999");
           if (data) {

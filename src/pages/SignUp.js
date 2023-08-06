@@ -162,7 +162,8 @@ const SignUp = () => {
           console.log(obj);
   
           const { data } = await axios.post(
-            "https://smoggy-necklace-yak.cyclic.app/user/register",
+            // "https://smoggy-necklace-yak.cyclic.app/user/register",
+            "http://192.168.1.6:8000/user/register",
             obj,{
               headers: {
                 "Content-Type": "application/json",

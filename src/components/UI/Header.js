@@ -74,8 +74,12 @@ function Header() {
     deviceCountryCode,
     deviceLanguageCode,
     deviceIdentifier,
+    profilePicture,
+    gender,
   } = useSelector((state) => state.user);
+
   const token = localStorage.getItem("token");
+ 
   const userId = localStorage.getItem("userId");
   const [activeLink, setActiveLink] = useState("home");
 
@@ -105,10 +109,10 @@ function Header() {
   }, []);
 
   const profilePictureUrl = useMemo(() => {
-    if (user?.profilePicture !== undefined && user?.profilePicture !== null) {
-      return user?.profilePicture;
+    if (profilePicture !== undefined && profilePicture !== null) {
+      return profilePicture;
     } else {
-      return user?.gender === "Male" ? male3 : female3;
+      return gender === "male" ? male3 : female3;
     }
   }, [user?.profilePicture, user?.gender]);
 
@@ -128,6 +132,7 @@ function Header() {
   const handleLogout = async () => {
     if (isLoggedIn) {
       try {
+        localStorage.setItem("token",null);
         dispatch(UserActions.clear());
         dispatch(UserActions.isLoggedIn(false));
         handleClose();
@@ -408,10 +413,8 @@ function Header() {
            
             
           </Box>
-          {!isLoggedIn ||
-          !token ||
-         
-          Date.now() >= parseInt(tokenExpiration) ? (
+          {!isLoggedIn && 
+          !token  ? (
             <Stack
               direction="row"
               spacing={2}

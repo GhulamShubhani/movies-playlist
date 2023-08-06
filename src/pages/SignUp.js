@@ -153,24 +153,14 @@ const SignUp = () => {
             device: {
               fcmToken,
               deviceCountryData,
-              deviceIdentifier : deviceName,
-              
+              deviceIdentifier : deviceName, 
             },
-           
           };
-
-          console.log(obj);
-  
           const { data } = await axios.post(
-            // "https://smoggy-necklace-yak.cyclic.app/user/register",
-            "http://192.168.1.6:8000/user/register",
-            obj,{
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
+            "https://smoggy-necklace-yak.cyclic.app/user/register",
+            // "http://192.168.1.6:8000/user/register",
+            obj
           );
-          console.log(data,"dara9999999999999");
           if (data) {
             toast.success("User registered successfully", toastOptions);
             setShowPassword(false);
@@ -311,9 +301,9 @@ const SignUp = () => {
                       }
                       // onChange={handleChange}
                     >
-                      <MenuItem value={"Male"}>Male</MenuItem>
-                      <MenuItem value={"Female"}>Female</MenuItem>
-                      <MenuItem value={"Other"}>Other</MenuItem>
+                      <MenuItem value={"male"}>Male</MenuItem>
+                      <MenuItem value={"female"}>Female</MenuItem>
+                      <MenuItem value={"other"}>Other</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>

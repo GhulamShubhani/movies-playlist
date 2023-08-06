@@ -18,6 +18,8 @@ import PrivateRoute from "./utils/PrivateRoute";
 import Header from "./components/UI/Header";
 import Main from "./pages/Main";
 import UploadMovies from "./pages/UploadMovies"
+import PublicList from "./pages/PublicList";
+import Privatelist from "./pages/Privatelist";
 
 const App = () => {
   return (
@@ -31,14 +33,14 @@ const App = () => {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/up" element={<UploadMovies />} />
          
-          {/* <Route
-            path="/my-account"
-            element={<PrivateRoute Component={MyAccount} />}
+          <Route
+            path="/public"
+            element={<PrivateRoute Component={PublicList} />}
           />
           <Route
-            path="/view-profile"
-            element={<PrivateRoute Component={ViewProfile} />}
-          /> */}
+            path="/private"
+            element={<PrivateRoute Component={Privatelist} />}
+          />
 
           
           

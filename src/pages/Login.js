@@ -100,24 +100,25 @@ const Login = () => {
             }
           );
           if (data) {
+            console.log("tttt",data);
             localStorage.setItem("userId", data.id);
             toast.success("User registered successfully", toastOptions);
 
             Cookies.set("logger", password);
-
+            localStorage.setItem("token",data.accessToken)
             dispatch(UserActions.isLoggedIn(true));
             dispatch(UserActions.fcmToken("123"));
             dispatch(UserActions.deviceName(deviceIdentifier1));
             dispatch(UserActions.deviceCountryCode(deviceCountryData1));
-            dispatch(UserActions.email(data.email));
-            dispatch(UserActions.firstName(data.firstName));
-            dispatch(UserActions.lastName(data.lastName));
-            dispatch(UserActions.gender(data.gender));
-            dispatch(UserActions.phone(data.phone));
-            dispatch(UserActions.profilePicture(data.profilePicture));
-            dispatch(UserActions.type(data.type));
-            dispatch(UserActions.password(data.password));
-            dispatch(UserActions.id(data.id));
+            dispatch(UserActions.email(email));
+            dispatch(UserActions.firstName(data.user.firstName));
+            dispatch(UserActions.lastName(data.user.lastName));
+            dispatch(UserActions.gender(data.user.gender));
+            dispatch(UserActions.phone(data.user.phone));
+            dispatch(UserActions.profilePicture(data.user.profilePicture));
+            dispatch(UserActions.type(data.user.type));
+            dispatch(UserActions.password(password));
+            dispatch(UserActions.id(data.user.id));
 
             // dispatch(UserActions.clear());
             navigate("/login");

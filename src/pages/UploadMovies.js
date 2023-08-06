@@ -72,7 +72,7 @@ const UploadMovies = () => {
   };
 
   const handleSubmit = async ()=>{
-    const response  = await axios.post("http://192.168.1.5:8000/add/createList1",{
+    const response  = await axios.post("https://smoggy-necklace-yak.cyclic.app/add/createList1",{
         movieTitle:title,
         movieYear:date,
         movieImage:imageUrl

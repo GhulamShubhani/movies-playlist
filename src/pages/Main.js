@@ -7,7 +7,7 @@ const Main = () => {
    
     useEffect(()=>{
         const getAllData = async()=>{
-            const {data} = await axios.get("http://192.168.1.5:8000/add/getList1")
+            const {data} = await axios.get("https://smoggy-necklace-yak.cyclic.app/add/getList1")
             setDataAll(data)
             console.log(data,"data");
         }

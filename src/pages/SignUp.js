@@ -162,7 +162,7 @@ const SignUp = () => {
           console.log(obj);
   
           const { data } = await axios.post(
-            "http://192.168.1.5:8000/user/register",
+            "https://smoggy-necklace-yak.cyclic.app/user/register",
             obj
           );
           console.log(data,"dara9999999999999");

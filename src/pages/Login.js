@@ -87,7 +87,7 @@ const Login = () => {
           },
         });
           const { data } = await axios.post(
-            "http://192.168.1.5:8000/user/login",
+            "https://smoggy-necklace-yak.cyclic.app/user/login",
             {
               email,
               password,

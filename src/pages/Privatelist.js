@@ -1,9 +1,12 @@
-import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import { Box, Container, Grid, Paper, Typography,CircularProgress, } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 const Privatelist = () => {
     const token = localStorage.getItem("token");
     const [DataAll, setDataAll] = useState([]);
+
+    const [isLoading, setIsLoading] = useState(false);
+
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -41,6 +44,18 @@ const Privatelist = () => {
               alignItems: "center",
             }}
           >
+            {isLoading && (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      marginTop: "-12px",
+                      marginLeft: "-12px",
+                    }}
+                  />
+                )}
             <Box>
               <Typography>{value.playlistName}</Typography>
               <Typography>{value.playlistType}</Typography>

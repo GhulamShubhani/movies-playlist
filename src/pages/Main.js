@@ -1,4 +1,4 @@
-import { Box, Container, FormControl, FormControlLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import { Box, Container,CircularProgress, FormControl, FormControlLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
@@ -14,6 +14,8 @@ const Main = () => {
   const [DataAll, setDataAll] = useState([]);
   const [PlaylistData, setPlaylistData] = useState([]);
   const [movieslistId, setmovieslistId] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const [open, setOpen] = useState(false);
   const [publicState, setpublicState] = useState(null);
@@ -39,6 +41,7 @@ const Main = () => {
 
   useEffect(() => {
     const getAllData = async () => {
+        setIsLoading(true);
         try{
 
             const { data } = await axios.get(
@@ -47,8 +50,11 @@ const Main = () => {
             setDataAll(data);
             // console.log(data, "data");
         }catch(err){
+            console.log(err);
+        } finally {
+            setIsLoading(false);
+          }
 
-        }
     };
     getAllData();
   }, []);
@@ -87,6 +93,9 @@ const Main = () => {
                  }
                 
              },config)
+             if(res){
+                handleClose()
+             }
         }catch(err){
             console.log(err);
         }
@@ -103,8 +112,8 @@ const Main = () => {
                 }]
 
             });
-            const res = await axios.post("https://smoggy-necklace-yak.cyclic.app/playlist/CreatePlaylist",{
             // const res = await axios.post("http://192.168.1.6:8000/playlist/CreatePlaylist",{
+            const res = await axios.post("https://smoggy-necklace-yak.cyclic.app/playlist/CreatePlaylist",{
                 "email":email,
                  "playlistName":playlistEwName,
                  "playlistType":publicState,
@@ -113,6 +122,9 @@ const Main = () => {
                  }]
                 
              },config)
+             if(res){
+                handleClose()
+             }
              console.log(res,"data aaya add ho k");
         }catch(err){
             console.log(err);
@@ -147,6 +159,18 @@ const Main = () => {
                 alignItems: "center",
               }}
             >
+                {isLoading && (
+                  <CircularProgress
+                    size={24}
+                    sx={{
+                      position: "absolute",
+                      top: "50%",
+                      left: "50%",
+                      marginTop: "-12px",
+                      marginLeft: "-12px",
+                    }}
+                  />
+                )}
               <Box>
                 <img
                   src={value.movieImage}

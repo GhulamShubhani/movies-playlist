@@ -279,7 +279,7 @@ function Header() {
                 textDecoration: "none",
               }}
             >
-              PRICE MY PROJECT
+              Ghulam Shubhani
             </Typography>
           </Box>
 
@@ -345,7 +345,7 @@ function Header() {
               textDecoration: "none",
             }}
           >
-            test
+            GS
           </Typography>
           <Box
             spacing={2}

@@ -20,6 +20,8 @@ import Main from "./pages/Main";
 import UploadMovies from "./pages/UploadMovies"
 import PublicList from "./pages/PublicList";
 import Privatelist from "./pages/Privatelist";
+import MyPublicPlaylist from "./pages/MyPublicPlaylist";
+import MyPrivatePlaylist from "./pages/MyPrivatePlaylist";
 
 const App = () => {
   return (
@@ -37,9 +39,17 @@ const App = () => {
             path="/public"
             element={<PrivateRoute Component={PublicList} />}
           />
+            <Route
+              path="/private"
+              element={<PrivateRoute Component={Privatelist} />}
+            />
           <Route
-            path="/private"
-            element={<PrivateRoute Component={Privatelist} />}
+            path="/mypublic"
+            element={<PrivateRoute Component={MyPublicPlaylist} />}
+          />
+          <Route
+            path="/myprivate"
+            element={<PrivateRoute Component={MyPrivatePlaylist} />}
           />
 
           

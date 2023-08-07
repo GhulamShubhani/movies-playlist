@@ -1,10 +1,11 @@
-import { Box, Container, Grid, Typography,CircularProgress, } from "@mui/material";
+import { Box, Container, Grid, Typography,CircularProgress, TextField, } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const PublicList = () => {
   const token = localStorage.getItem("token");
   const [DataAll, setDataAll] = useState([]);
+  const [searching, setsearching] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -13,23 +14,54 @@ const PublicList = () => {
       Authorization: `Bearer ${token}`,
     },
   };
+  const getAllData = async () => {
+    try {
+      const { data } = await axios.get(
+          "https://smoggy-necklace-yak.cyclic.app/playlist/getallplaylist",config
+        // "http://192.168.1.6:8000/playlist/getallplaylist",config
+      );
+      setDataAll(data.allPlaylist);
+      // console.log(data, "data");
+    } catch (err) {}
+  };
   useEffect(() => {
-    const getAllData = async () => {
-      try {
-        const { data } = await axios.get(
-            "https://smoggy-necklace-yak.cyclic.app/playlist/getallplaylist",config
-        //   "http://192.168.1.6:8000/playlist/getallplaylist",config
-        );
-        setDataAll(data.allPlaylist);
-        console.log(data, "data");
-      } catch (err) {}
-    };
     getAllData();
   }, []);
-  console.log(DataAll, "---------");
+  // console.log(DataAll, "---------");
+  
+  const handleSearch = (e) => {
+    const searchValue = e.target.value.toLowerCase();
+    setsearching(searchValue);
+  
+    if (searchValue.length === 0 || searchValue === "") {
+      getAllData();
+    } else {
+      const filteredData = DataAll.filter((item) => {
+        const playlistName = item.playlistData;
+        const hasMatchingMovie = playlistName.some(
+          (val) => val.movieslistId.movieTitle.toLowerCase().includes(searchValue)
+          );
+          return hasMatchingMovie;
+        });
+      setDataAll(filteredData);
+    }
+  };
   return (
     <Container>
       <Grid container>
+      <Grid item xs={12} sm={12} sx={{my:2,mx:4}}>
+          <TextField
+            autoComplete="given-name"
+            name="searching"
+            value={searching}
+            onChange={handleSearch}
+            required
+            fullWidth
+            id="searching"
+            label={"Searching"}
+            autoFocus
+          />
+        </Grid>
         {DataAll &&
           DataAll.map((value, id) => (
             <Grid
@@ -65,7 +97,7 @@ const PublicList = () => {
                 {value.playlistData &&
                   value.playlistData.map((val, id) => (
                     <Box>
-                      {console.log(val.movieslistId, "pppppppp")}
+                      {/* {console.log(val.movieslistId, "pppppppp")} */}
                       <img
                         src={val?.movieslistId?.movieImage}
                         alt="roomy logo"

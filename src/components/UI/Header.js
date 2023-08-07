@@ -408,7 +408,45 @@ function Header() {
               component={NavLink}
               to={"/private"}
             >
-              Private list
+              MY Playlist
+            </Button>
+            <Button
+              color={activeLink === "mypublic" ? "primary" : "inherit"}
+              sx={{
+                borderRadius: "10px",
+                fontWeight: "bold",
+                color: activeLink === "mypublic" ? "#fff" : "red",
+                backgroundColor:
+                  activeLink === "mypublic" ? "red" : "transparent",
+                "&:hover": {
+                  backgroundColor: "red",
+                  color: "#fff",
+                },
+              }}
+              onClick={() => handleClick("mypublic")}
+              component={NavLink}
+              to={"/mypublic"}
+            >
+              MY Public Playlist
+            </Button>
+            <Button
+              color={activeLink === "myprivate" ? "primary" : "inherit"}
+              sx={{
+                borderRadius: "10px",
+                fontWeight: "bold",
+                color: activeLink === "myprivate" ? "#fff" : "red",
+                backgroundColor:
+                  activeLink === "myprivate" ? "red" : "transparent",
+                "&:hover": {
+                  backgroundColor: "red",
+                  color: "#fff",
+                },
+              }}
+              onClick={() => handleClick("myprivate")}
+              component={NavLink}
+              to={"/myprivate"}
+            >
+              My Private playlist
             </Button>
            
             
